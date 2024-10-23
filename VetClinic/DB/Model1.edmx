@@ -1,0 +1,743 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище VeterinaryClinicModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="AppointmentID" />
+          </Key>
+          <Property Name="AppointmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PetID" Type="int" Nullable="false" />
+          <Property Name="DoctorID" Type="int" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+          <Property Name="Conclusion" Type="text" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" />
+          <Property Name="Birthday" Type="date" />
+        </EntityType>
+        <EntityType Name="Consumption">
+          <Key>
+            <PropertyRef Name="ConsumptionID" />
+          </Key>
+          <Property Name="ConsumptionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomenclatureID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="AppoinmentID" Type="int" />
+        </EntityType>
+        <EntityType Name="Counterparty">
+          <Key>
+            <PropertyRef Name="CounterpartyID" />
+          </Key>
+          <Property Name="CounterpartyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Doctors">
+          <Key>
+            <PropertyRef Name="DoctorID" />
+          </Key>
+          <Property Name="DoctorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="DiplomNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="PostID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="InvoiceID" />
+          </Key>
+          <Property Name="InvoiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomenclatureID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Nomenclature">
+          <Key>
+            <PropertyRef Name="NomenclatureID" />
+          </Key>
+          <Property Name="NomenclatureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NomenclatureTypeID" Type="int" Nullable="false" />
+          <Property Name="Cost" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="CounterpartyID" Type="int" />
+        </EntityType>
+        <EntityType Name="NomenclatureType">
+          <Key>
+            <PropertyRef Name="NomenclatureTypeID" />
+          </Key>
+          <Property Name="NomenclatureTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pets">
+          <Key>
+            <PropertyRef Name="PetID" />
+          </Key>
+          <Property Name="PetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="TypeAnimalID" Type="int" Nullable="false" />
+          <Property Name="Birthday" Type="date" />
+        </EntityType>
+        <EntityType Name="Posts">
+          <Key>
+            <PropertyRef Name="PostID" />
+          </Key>
+          <Property Name="PostID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TypeAnimal">
+          <Key>
+            <PropertyRef Name="TypeAnimalID" />
+          </Key>
+          <Property Name="TypeAnimalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Appointment_Doctors">
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="1" />
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="DoctorID" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Appointment_Pets">
+          <End Role="Pets" Type="Self.Pets" Multiplicity="1" />
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="PetID" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="PetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Consumption_Appointment">
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="0..1" />
+          <End Role="Consumption" Type="Self.Consumption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Appointment">
+              <PropertyRef Name="AppointmentID" />
+            </Principal>
+            <Dependent Role="Consumption">
+              <PropertyRef Name="AppoinmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Consumption_Nomenclature">
+          <End Role="Nomenclature" Type="Self.Nomenclature" Multiplicity="1" />
+          <End Role="Consumption" Type="Self.Consumption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nomenclature">
+              <PropertyRef Name="NomenclatureID" />
+            </Principal>
+            <Dependent Role="Consumption">
+              <PropertyRef Name="NomenclatureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctors_Posts">
+          <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="PostID" />
+            </Principal>
+            <Dependent Role="Doctors">
+              <PropertyRef Name="PostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Nomenclature">
+          <End Role="Nomenclature" Type="Self.Nomenclature" Multiplicity="1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nomenclature">
+              <PropertyRef Name="NomenclatureID" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="NomenclatureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nomenclature_Counterparty">
+          <End Role="Counterparty" Type="Self.Counterparty" Multiplicity="0..1" />
+          <End Role="Nomenclature" Type="Self.Nomenclature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Counterparty">
+              <PropertyRef Name="CounterpartyID" />
+            </Principal>
+            <Dependent Role="Nomenclature">
+              <PropertyRef Name="CounterpartyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nomenclature_NomenclatureTypeID1">
+          <End Role="NomenclatureType" Type="Self.NomenclatureType" Multiplicity="1" />
+          <End Role="Nomenclature" Type="Self.Nomenclature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NomenclatureType">
+              <PropertyRef Name="NomenclatureTypeID" />
+            </Principal>
+            <Dependent Role="Nomenclature">
+              <PropertyRef Name="NomenclatureTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pets_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Pets" Type="Self.Pets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Pets">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pets_TypeAnimal">
+          <End Role="TypeAnimal" Type="Self.TypeAnimal" Multiplicity="1" />
+          <End Role="Pets" Type="Self.Pets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeAnimal">
+              <PropertyRef Name="TypeAnimalID" />
+            </Principal>
+            <Dependent Role="Pets">
+              <PropertyRef Name="TypeAnimalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище VeterinaryClinicModelContainer">
+          <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Consumption" EntityType="Self.Consumption" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Counterparty" EntityType="Self.Counterparty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctors" EntityType="Self.Doctors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nomenclature" EntityType="Self.Nomenclature" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NomenclatureType" EntityType="Self.NomenclatureType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pets" EntityType="Self.Pets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeAnimal" EntityType="Self.TypeAnimal" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Appointment_Doctors" Association="Self.FK_Appointment_Doctors">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Appointment" EntitySet="Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Appointment_Pets" Association="Self.FK_Appointment_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Appointment" EntitySet="Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Consumption_Appointment" Association="Self.FK_Consumption_Appointment">
+            <End Role="Appointment" EntitySet="Appointment" />
+            <End Role="Consumption" EntitySet="Consumption" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Consumption_Nomenclature" Association="Self.FK_Consumption_Nomenclature">
+            <End Role="Nomenclature" EntitySet="Nomenclature" />
+            <End Role="Consumption" EntitySet="Consumption" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctors_Posts" Association="Self.FK_Doctors_Posts">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="Doctors" EntitySet="Doctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Nomenclature" Association="Self.FK_Invoice_Nomenclature">
+            <End Role="Nomenclature" EntitySet="Nomenclature" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nomenclature_Counterparty" Association="Self.FK_Nomenclature_Counterparty">
+            <End Role="Counterparty" EntitySet="Counterparty" />
+            <End Role="Nomenclature" EntitySet="Nomenclature" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nomenclature_NomenclatureTypeID1" Association="Self.FK_Nomenclature_NomenclatureTypeID1">
+            <End Role="NomenclatureType" EntitySet="NomenclatureType" />
+            <End Role="Nomenclature" EntitySet="Nomenclature" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pets_Clients" Association="Self.FK_Pets_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Pets" EntitySet="Pets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pets_TypeAnimal" Association="Self.FK_Pets_TypeAnimal">
+            <End Role="TypeAnimal" EntitySet="TypeAnimal" />
+            <End Role="Pets" EntitySet="Pets" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VeterinaryClinicModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="AppointmentID" />
+          </Key>
+          <Property Name="AppointmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PetID" Type="Int32" Nullable="false" />
+          <Property Name="DoctorID" Type="Int32" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Conclusion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Doctors" Relationship="Self.FK_Appointment_Doctors" FromRole="Appointment" ToRole="Doctors" />
+          <NavigationProperty Name="Pets" Relationship="Self.FK_Appointment_Pets" FromRole="Appointment" ToRole="Pets" />
+          <NavigationProperty Name="Consumption" Relationship="Self.FK_Consumption_Appointment" FromRole="Appointment" ToRole="Consumption" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Birthday" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Pets" Relationship="Self.FK_Pets_Clients" FromRole="Clients" ToRole="Pets" />
+        </EntityType>
+        <EntityType Name="Consumption">
+          <Key>
+            <PropertyRef Name="ConsumptionID" />
+          </Key>
+          <Property Name="ConsumptionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomenclatureID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="AppoinmentID" Type="Int32" />
+          <NavigationProperty Name="Appointment" Relationship="Self.FK_Consumption_Appointment" FromRole="Consumption" ToRole="Appointment" />
+          <NavigationProperty Name="Nomenclature" Relationship="Self.FK_Consumption_Nomenclature" FromRole="Consumption" ToRole="Nomenclature" />
+        </EntityType>
+        <EntityType Name="Counterparty">
+          <Key>
+            <PropertyRef Name="CounterpartyID" />
+          </Key>
+          <Property Name="CounterpartyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Nomenclature" Relationship="Self.FK_Nomenclature_Counterparty" FromRole="Counterparty" ToRole="Nomenclature" />
+        </EntityType>
+        <EntityType Name="Doctors">
+          <Key>
+            <PropertyRef Name="DoctorID" />
+          </Key>
+          <Property Name="DoctorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DiplomNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Appointment" Relationship="Self.FK_Appointment_Doctors" FromRole="Doctors" ToRole="Appointment" />
+          <NavigationProperty Name="Posts" Relationship="Self.FK_Doctors_Posts" FromRole="Doctors" ToRole="Posts" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="InvoiceID" />
+          </Key>
+          <Property Name="InvoiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomenclatureID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Nomenclature" Relationship="Self.FK_Invoice_Nomenclature" FromRole="Invoice" ToRole="Nomenclature" />
+        </EntityType>
+        <EntityType Name="Nomenclature">
+          <Key>
+            <PropertyRef Name="NomenclatureID" />
+          </Key>
+          <Property Name="NomenclatureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NomenclatureTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="CounterpartyID" Type="Int32" />
+          <NavigationProperty Name="Consumption" Relationship="Self.FK_Consumption_Nomenclature" FromRole="Nomenclature" ToRole="Consumption" />
+          <NavigationProperty Name="Counterparty" Relationship="Self.FK_Nomenclature_Counterparty" FromRole="Nomenclature" ToRole="Counterparty" />
+          <NavigationProperty Name="Invoice" Relationship="Self.FK_Invoice_Nomenclature" FromRole="Nomenclature" ToRole="Invoice" />
+          <NavigationProperty Name="NomenclatureType" Relationship="Self.FK_Nomenclature_NomenclatureTypeID1" FromRole="Nomenclature" ToRole="NomenclatureType" />
+        </EntityType>
+        <EntityType Name="NomenclatureType">
+          <Key>
+            <PropertyRef Name="NomenclatureTypeID" />
+          </Key>
+          <Property Name="NomenclatureTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Nomenclature" Relationship="Self.FK_Nomenclature_NomenclatureTypeID1" FromRole="NomenclatureType" ToRole="Nomenclature" />
+        </EntityType>
+        <EntityType Name="Pets">
+          <Key>
+            <PropertyRef Name="PetID" />
+          </Key>
+          <Property Name="PetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="TypeAnimalID" Type="Int32" Nullable="false" />
+          <Property Name="Birthday" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Appointment" Relationship="Self.FK_Appointment_Pets" FromRole="Pets" ToRole="Appointment" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Pets_Clients" FromRole="Pets" ToRole="Clients" />
+          <NavigationProperty Name="TypeAnimal" Relationship="Self.FK_Pets_TypeAnimal" FromRole="Pets" ToRole="TypeAnimal" />
+        </EntityType>
+        <EntityType Name="Posts">
+          <Key>
+            <PropertyRef Name="PostID" />
+          </Key>
+          <Property Name="PostID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Doctors" Relationship="Self.FK_Doctors_Posts" FromRole="Posts" ToRole="Doctors" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TypeAnimal">
+          <Key>
+            <PropertyRef Name="TypeAnimalID" />
+          </Key>
+          <Property Name="TypeAnimalID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Pets" Relationship="Self.FK_Pets_TypeAnimal" FromRole="TypeAnimal" ToRole="Pets" />
+        </EntityType>
+        <Association Name="FK_Appointment_Doctors">
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="1" />
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="DoctorID" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Appointment_Pets">
+          <End Role="Pets" Type="Self.Pets" Multiplicity="1" />
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="PetID" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="PetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Consumption_Appointment">
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="0..1" />
+          <End Role="Consumption" Type="Self.Consumption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Appointment">
+              <PropertyRef Name="AppointmentID" />
+            </Principal>
+            <Dependent Role="Consumption">
+              <PropertyRef Name="AppoinmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pets_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Pets" Type="Self.Pets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Pets">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Consumption_Nomenclature">
+          <End Role="Nomenclature" Type="Self.Nomenclature" Multiplicity="1" />
+          <End Role="Consumption" Type="Self.Consumption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nomenclature">
+              <PropertyRef Name="NomenclatureID" />
+            </Principal>
+            <Dependent Role="Consumption">
+              <PropertyRef Name="NomenclatureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nomenclature_Counterparty">
+          <End Role="Counterparty" Type="Self.Counterparty" Multiplicity="0..1" />
+          <End Role="Nomenclature" Type="Self.Nomenclature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Counterparty">
+              <PropertyRef Name="CounterpartyID" />
+            </Principal>
+            <Dependent Role="Nomenclature">
+              <PropertyRef Name="CounterpartyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctors_Posts">
+          <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="PostID" />
+            </Principal>
+            <Dependent Role="Doctors">
+              <PropertyRef Name="PostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Nomenclature">
+          <End Role="Nomenclature" Type="Self.Nomenclature" Multiplicity="1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nomenclature">
+              <PropertyRef Name="NomenclatureID" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="NomenclatureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nomenclature_NomenclatureTypeID1">
+          <End Role="NomenclatureType" Type="Self.NomenclatureType" Multiplicity="1" />
+          <End Role="Nomenclature" Type="Self.Nomenclature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NomenclatureType">
+              <PropertyRef Name="NomenclatureTypeID" />
+            </Principal>
+            <Dependent Role="Nomenclature">
+              <PropertyRef Name="NomenclatureTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pets_TypeAnimal">
+          <End Role="TypeAnimal" Type="Self.TypeAnimal" Multiplicity="1" />
+          <End Role="Pets" Type="Self.Pets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeAnimal">
+              <PropertyRef Name="TypeAnimalID" />
+            </Principal>
+            <Dependent Role="Pets">
+              <PropertyRef Name="TypeAnimalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VeterinaryClinicEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Appointment" EntityType="Self.Appointment" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Consumption" EntityType="Self.Consumption" />
+          <EntitySet Name="Counterparty" EntityType="Self.Counterparty" />
+          <EntitySet Name="Doctors" EntityType="Self.Doctors" />
+          <EntitySet Name="Invoice" EntityType="Self.Invoice" />
+          <EntitySet Name="Nomenclature" EntityType="Self.Nomenclature" />
+          <EntitySet Name="NomenclatureType" EntityType="Self.NomenclatureType" />
+          <EntitySet Name="Pets" EntityType="Self.Pets" />
+          <EntitySet Name="Posts" EntityType="Self.Posts" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TypeAnimal" EntityType="Self.TypeAnimal" />
+          <AssociationSet Name="FK_Appointment_Doctors" Association="Self.FK_Appointment_Doctors">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Appointment" EntitySet="Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Appointment_Pets" Association="Self.FK_Appointment_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Appointment" EntitySet="Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Consumption_Appointment" Association="Self.FK_Consumption_Appointment">
+            <End Role="Appointment" EntitySet="Appointment" />
+            <End Role="Consumption" EntitySet="Consumption" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pets_Clients" Association="Self.FK_Pets_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Pets" EntitySet="Pets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Consumption_Nomenclature" Association="Self.FK_Consumption_Nomenclature">
+            <End Role="Nomenclature" EntitySet="Nomenclature" />
+            <End Role="Consumption" EntitySet="Consumption" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nomenclature_Counterparty" Association="Self.FK_Nomenclature_Counterparty">
+            <End Role="Counterparty" EntitySet="Counterparty" />
+            <End Role="Nomenclature" EntitySet="Nomenclature" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctors_Posts" Association="Self.FK_Doctors_Posts">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="Doctors" EntitySet="Doctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Nomenclature" Association="Self.FK_Invoice_Nomenclature">
+            <End Role="Nomenclature" EntitySet="Nomenclature" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nomenclature_NomenclatureTypeID1" Association="Self.FK_Nomenclature_NomenclatureTypeID1">
+            <End Role="NomenclatureType" EntitySet="NomenclatureType" />
+            <End Role="Nomenclature" EntitySet="Nomenclature" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pets_TypeAnimal" Association="Self.FK_Pets_TypeAnimal">
+            <End Role="TypeAnimal" EntitySet="TypeAnimal" />
+            <End Role="Pets" EntitySet="Pets" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище VeterinaryClinicModelContainer" CdmEntityContainer="VeterinaryClinicEntities">
+          <EntitySetMapping Name="Appointment">
+            <EntityTypeMapping TypeName="VeterinaryClinicModel.Appointment">
+              <MappingFragment StoreEntitySet="Appointment">
+                <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
+                <ScalarProperty Name="PetID" ColumnName="PetID" />
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="Conclusion" ColumnName="Conclusion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="VeterinaryClinicModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Consumption">
+            <EntityTypeMapping TypeName="VeterinaryClinicModel.Consumption">
+              <MappingFragment StoreEntitySet="Consumption">
+                <ScalarProperty Name="ConsumptionID" ColumnName="ConsumptionID" />
+                <ScalarProperty Name="NomenclatureID" ColumnName="NomenclatureID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="AppoinmentID" ColumnName="AppoinmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Counterparty">
+            <EntityTypeMapping TypeName="VeterinaryClinicModel.Counterparty">
+              <MappingFragment StoreEntitySet="Counterparty">
+                <ScalarProperty Name="CounterpartyID" ColumnName="CounterpartyID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doctors">
+            <EntityTypeMapping TypeName="VeterinaryClinicModel.Doctors">
+              <MappingFragment StoreEntitySet="Doctors">
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="DiplomNumber" ColumnName="DiplomNumber" />
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoice">
+            <EntityTypeMapping TypeName="VeterinaryClinicModel.Invoice">
+              <MappingFragment StoreEntitySet="Invoice">
+                <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+                <ScalarProperty Name="NomenclatureID" ColumnName="NomenclatureID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nomenclature">
+            <EntityTypeMapping TypeName="VeterinaryClinicModel.Nomenclature">
+              <MappingFragment StoreEntitySet="Nomenclature">
+                <ScalarProperty Name="NomenclatureID" ColumnName="NomenclatureID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NomenclatureTypeID" ColumnName="NomenclatureTypeID" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="CounterpartyID" ColumnName="CounterpartyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NomenclatureType">
+            <EntityTypeMapping TypeName="VeterinaryClinicModel.NomenclatureType">
+              <MappingFragment StoreEntitySet="NomenclatureType">
+                <ScalarProperty Name="NomenclatureTypeID" ColumnName="NomenclatureTypeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pets">
+            <EntityTypeMapping TypeName="VeterinaryClinicModel.Pets">
+              <MappingFragment StoreEntitySet="Pets">
+                <ScalarProperty Name="PetID" ColumnName="PetID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="TypeAnimalID" ColumnName="TypeAnimalID" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="VeterinaryClinicModel.Posts">
+              <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="VeterinaryClinicModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeAnimal">
+            <EntityTypeMapping TypeName="VeterinaryClinicModel.TypeAnimal">
+              <MappingFragment StoreEntitySet="TypeAnimal">
+                <ScalarProperty Name="TypeAnimalID" ColumnName="TypeAnimalID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
