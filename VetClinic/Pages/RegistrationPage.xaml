@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:VetClinic.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="900" d:DesignWidth="1450"
+      
       Title="RegistrationPage">
 
     <Grid>
@@ -36,8 +37,21 @@
         <TextBlock Text="Регистрация" 
                    Grid.Row="1" Grid.Column="1"
                    Style="{StaticResource Main}"/>
-        
-        
-
+        <StackPanel Grid.Row="2" Grid.Column="1"        
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="300">
+            <TextBlock Text="Фамилия" Style="{StaticResource default}"/>
+            <TextBox x:Name="surnameTb"/>
+            <TextBlock Text="Имя" Style="{StaticResource default}"/>
+            <TextBox x:Name="nameTb"/>
+            <TextBlock Text="Отчество" Style="{StaticResource default}"/>
+            <TextBox x:Name="PatronymicTb"/>
+            <TextBlock Text="Дата рождения" Style="{StaticResource default}"/>
+            <DatePicker x:Name="dateDp" Width="auto"/>
+            <Button x:Name="regBtn" Width="auto" Click="regBtn_Click">
+                Зарегистрироваться
+            </Button>
+        </StackPanel>
     </Grid>
 </Page>

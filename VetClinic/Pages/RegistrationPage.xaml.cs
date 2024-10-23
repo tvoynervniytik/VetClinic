@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VetClinic.Functions;
 
 namespace VetClinic.Pages
 {
@@ -23,6 +24,23 @@ namespace VetClinic.Pages
         public RegistrationPage()
         {
             InitializeComponent();
+        }
+
+        private void regBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (nameTb.Text == "" || PatronymicTb.Text == "" || surnameTb.Text == "" || dateDp.SelectedDate == null)
+            {
+                MessageBox.Show("Не все поля заполнены");
+            }
+            else
+            {
+
+                var userR = User.Reg(nameTb.Text.Trim(), surnameTb.Text.Trim(), PatronymicTb.Text.Trim(), dateDp.SelectedDate.Value);
+                if (userR != null)
+                {
+                    NavigationService.Navigate(new AuthorizationPage());
+                }
+            }
         }
     }
 }

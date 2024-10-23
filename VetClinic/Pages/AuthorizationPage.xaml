@@ -37,5 +37,21 @@
                    Grid.Row="1" Grid.Column="1"
                    Style="{StaticResource Main}"/>
 
+
+        <StackPanel Grid.Row="2" Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="300">
+            <TextBlock Text="Логин" Style="{StaticResource default}"/>
+            <TextBox x:Name="loginTb"/>
+            <TextBlock Text="Пароль" Style="{StaticResource default}"/>
+            <PasswordBox x:Name="passwordTb"/>
+            <Button Content="Нет аккаунта? Зарегистрироваться" 
+                    Width="300"
+                    Style="{StaticResource admin}" Click="Button_Click_1"/>
+            <Button Click="Button_Click">
+                Войти
+            </Button>
+        </StackPanel>
     </Grid>
 </Page>
