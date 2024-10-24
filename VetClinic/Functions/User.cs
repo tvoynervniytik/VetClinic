@@ -14,7 +14,6 @@ namespace VetClinic.Functions
         public static Clients Auth(string login, string password)
         {
             List<Clients> clients = new List<Clients>(DBConnection.clinic.Clients);
-            MessageBox.Show($"{clients.Count.ToString()}");
             var userExists = clients.FirstOrDefault(i=> i.Surname.Trim() == login && i.ClientID.ToString() == password);
             if (userExists == null)
             {
@@ -22,7 +21,7 @@ namespace VetClinic.Functions
             }
             else
             {
-                MessageBox.Show($"Пользователь {userExists.Surname} {userExists.Name}", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show($"Клиент {userExists.Surname} {userExists.Name}", "", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             return userExists;
         }

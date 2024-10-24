@@ -34,7 +34,6 @@ namespace VetClinic.Pages
             }
             else
             {
-
                 var userR = User.Reg(nameTb.Text.Trim(), surnameTb.Text.Trim(), PatronymicTb.Text.Trim(), dateDp.SelectedDate.Value);
                 if (userR != null)
                 {
