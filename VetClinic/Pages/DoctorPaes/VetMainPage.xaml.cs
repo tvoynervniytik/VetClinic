@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VetClinic.DB;
+using VetClinic.Functions;
 
 namespace VetClinic.Pages
 {
@@ -20,9 +22,20 @@ namespace VetClinic.Pages
     /// </summary>
     public partial class VetMainPage : Page
     {
+        private static List<Appointment> appointments;
+        private static List<Pets> pets;
+        private static List<TypeAnimal> types;
+        private static List<Clients> clients;
         public VetMainPage()
         {
             InitializeComponent();
+
+            appointments = new List<Appointment>(DBConnection.clinic.Appointment);
+            pets = new List<Pets>(DBConnection.clinic.Pets);
+            clients = new List<Clients>(DBConnection.clinic.Clients);
+            types = new List<TypeAnimal>(DBConnection.clinic.TypeAnimal);
+            appoinmentLv.ItemsSource = appointments.Where(i=> i.DateTime.Date == DateTime.Now.Date && i.DoctorID == User.doctor.DoctorID);
+            this.DataContext = this;
         }
     }
 }

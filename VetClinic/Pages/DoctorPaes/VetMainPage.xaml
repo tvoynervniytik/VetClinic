@@ -33,8 +33,47 @@
         <!--
         Заголовок
         -->
-        <TextBlock Text="Главная страница" 
+        <TextBlock Text="Приём клиента" 
                    Grid.Row="1" Grid.Column="1"
                    Style="{StaticResource Main}"/>
+
+
+        <ListView Grid.Row="2" Grid.Column="1"
+                  x:Name="appoinmentLv"
+                  VerticalAlignment="Top"
+                  Width="1000"
+                  Height="600">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="Животное" Width="300">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Pets.TypeAnimal.Name}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Клиент" Width="350">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Pets.Clients.Surname}"/>
+                                        <TextBlock Text="{Binding Pets.Clients.Name}"/>
+                                        <TextBlock Text="{Binding Pets.Clients.Patronymic}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Дата" Width="300">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DateTime}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Page>

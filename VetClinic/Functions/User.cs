@@ -14,6 +14,8 @@ namespace VetClinic.Functions
         public static int Role = 1;
         public static string passwordAdm = "111";
         public static string userNameAdm = "111";
+        public static Clients client;
+        public static Doctors doctor;
         public static Clients Auth(string login, string password)
         {
             List<Clients> clients = new List<Clients>(DBConnection.clinic.Clients);
@@ -26,6 +28,7 @@ namespace VetClinic.Functions
             {
                 MessageBox.Show($"Клиент {userExists.Surname} {userExists.Name}", "", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+            client= userExists;
             return userExists;
         }
         public static Doctors AuthVet(string login, string password)
@@ -40,6 +43,7 @@ namespace VetClinic.Functions
             {
                 MessageBox.Show($"Ветеринар {userExists.Surname} {userExists.Name}", "", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+            doctor = userExists;
             return userExists;
         }
         public static Clients Reg(string Surname, string Name, string Patronymic, DateTime Birthday)
