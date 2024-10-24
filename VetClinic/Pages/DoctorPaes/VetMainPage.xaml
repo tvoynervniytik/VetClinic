@@ -42,7 +42,7 @@
                   x:Name="appoinmentLv"
                   VerticalAlignment="Top"
                   Width="1000"
-                  Height="600">
+                  Height="600" SelectionChanged="appoinmentLv_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridView.Columns>

@@ -137,6 +137,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\DoctorPaes\EditAppoinment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\DoctorPaes\VetMainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -156,6 +160,9 @@
     </Compile>
     <Compile Include="Pages\AuthorizationPage.xaml.cs">
       <DependentUpon>AuthorizationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DoctorPaes\EditAppoinment.xaml.cs">
+      <DependentUpon>EditAppoinment.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\DoctorPaes\VetMainPage.xaml.cs">
       <DependentUpon>VetMainPage.xaml</DependentUpon>

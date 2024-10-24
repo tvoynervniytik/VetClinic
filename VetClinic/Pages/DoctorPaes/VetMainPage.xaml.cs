@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using VetClinic.DB;
 using VetClinic.Functions;
+using VetClinic.Pages.DoctorPaes;
 
 namespace VetClinic.Pages
 {
@@ -36,6 +37,12 @@ namespace VetClinic.Pages
             types = new List<TypeAnimal>(DBConnection.clinic.TypeAnimal);
             appoinmentLv.ItemsSource = appointments.Where(i=> i.DateTime.Date == DateTime.Now.Date && i.DoctorID == User.doctor.DoctorID);
             this.DataContext = this;
+        }
+
+        private void appoinmentLv_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var currentAppoinment = appoinmentLv.SelectedItem as Appointment;
+            NavigationService.Navigate(new EditAppoinment(currentAppoinment));
         }
     }
 }

@@ -1,0 +1,96 @@
+﻿<Page x:Class="VetClinic.Pages.DoctorPaes.EditAppoinment"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VetClinic.Pages.DoctorPaes"
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="1450"
+      Title="EditAppoinment">
+
+    <Grid>
+        <!--
+        Разметка страницы
+        -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--
+        Цветные поля
+        -->
+        <Rectangle Grid.RowSpan="3"
+            Fill="AliceBlue"/>
+        <Rectangle Grid.ColumnSpan="2"
+            Fill="AliceBlue"/>
+
+        <!--
+        Кнопка назад
+        -->
+        <Button Style="{StaticResource back}" 
+        Grid.Row="1" Click="BackBtn_Click"/>
+
+        <!--
+        Заголовок
+        -->
+        <StackPanel Orientation="Horizontal" 
+                    Grid.Row="1" Grid.Column="1"
+                    HorizontalAlignment="Center">
+            <TextBlock Text="Приём клиента " 
+                       Style="{StaticResource Main}"/>
+            <TextBlock x:Name="AppTb" Style="{StaticResource Main}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    Width="940"
+                    VerticalAlignment="Center">
+            <TextBlock Text="Дата:" 
+                       Style="{StaticResource default}"
+                       Margin="7"/>
+            <TextBox x:Name="DateTb"
+                     HorizontalAlignment="Left"
+                     Margin="7"
+                     IsEnabled="False"
+                     Width="400"/>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="7">
+                    <TextBlock Text="Клиент:" 
+                               Style="{StaticResource default}"/>
+                    <TextBox x:Name="ClientTb"
+                             IsEnabled="False"/>
+                </StackPanel>
+                <StackPanel Margin="7">
+                    <TextBlock Text="Питомец номер:" 
+                               Style="{StaticResource default}"/>
+
+                    <TextBox x:Name="PetTb"
+                         IsEnabled="False"/>
+                </StackPanel>
+                <StackPanel Margin="7">
+                    <TextBlock Text="Тип животного:" 
+                               Style="{StaticResource default}"/>
+                    <TextBox x:Name="TypeAnimalTb" 
+                             IsEnabled="False"/>
+                </StackPanel>
+
+            </StackPanel>
+            <TextBlock Text="Заключение" Margin="7"
+                       Style="{StaticResource default}"/>
+            <TextBox HorizontalAlignment="Left" 
+                     Width="900"
+                     x:Name="ConsolutionTb"
+                     Height="300"
+                     Margin="7"/>
+
+            <Button Content="Добавить" Name="addBtn" Click="addBtn_Click"/>
+        </StackPanel>
+
+    </Grid>
+</Page>
