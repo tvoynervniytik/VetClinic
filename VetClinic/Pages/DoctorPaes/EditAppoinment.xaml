@@ -89,7 +89,15 @@
                      Height="300"
                      Margin="7"/>
 
-            <Button Content="Добавить" Name="addBtn" Click="addBtn_Click"/>
+            <Button Content="Добавить" Name="addBtn" 
+                    Click="addBtn_Click"
+                    HorizontalAlignment="Left"/>
+            <Button Content="Отправить на лабраторные исследования" 
+                    Name="labBtn" Width="555"
+                    HorizontalAlignment="Right"
+                    FontSize="25"
+                    Style="{StaticResource back}"
+                    Click="labBtn_Click"/>
         </StackPanel>
 
     </Grid>

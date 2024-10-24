@@ -36,6 +36,8 @@ namespace VetClinic.Pages.DoctorPaes
             PetTb.Text = curAppointment.PetID.ToString();
             TypeAnimalTb.Text = curAppointment.Pets.TypeAnimal.Name;
             ConsolutionTb.Text = curAppointment.Conclusion;
+            if (appointment.Doctors.PostID == 3)
+                labBtn.Visibility = Visibility.Hidden;
             this.DataContext = this;
         }
 
@@ -48,7 +50,18 @@ namespace VetClinic.Pages.DoctorPaes
         {
             curAppointment.Conclusion = ConsolutionTb.Text;
             DBConnection.clinic.SaveChanges();
-            NavigationService.Navigate(new VetMainPage());
+            MessageBox.Show("Добавлено заключение");
+        }
+
+        private void labBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Appointment appointment = new Appointment();
+            appointment.PetID = curAppointment.PetID;
+            appointment.DoctorID = 8;
+            appointment.DateTime = DateTime.Now;
+            DBConnection.clinic.Appointment.Add(appointment);
+            DBConnection.clinic.SaveChanges();
+            MessageBox.Show($"Добавлена запись в лабораторию питомца {appointment.PetID}");
         }
     }
 }
