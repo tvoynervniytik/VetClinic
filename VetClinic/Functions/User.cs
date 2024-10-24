@@ -11,17 +11,34 @@ namespace VetClinic.Functions
 {
     public class User
     {
+        public static int Role = 1;
+        public static string passwordAdm = "111";
+        public static string userNameAdm = "111";
         public static Clients Auth(string login, string password)
         {
             List<Clients> clients = new List<Clients>(DBConnection.clinic.Clients);
-            var userExists = clients.FirstOrDefault(i=> i.Surname.Trim() == login && i.ClientID.ToString() == password);
+            var userExists = clients.FirstOrDefault(i => i.Surname.Trim() == login && i.ClientID.ToString() == password);
             if (userExists == null)
             {
-                MessageBox.Show("Такого пользователя не существует", "Ошибка пользователя", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Такого клиента не существует", "Ошибка пользователя", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
                 MessageBox.Show($"Клиент {userExists.Surname} {userExists.Name}", "", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            return userExists;
+        }
+        public static Doctors AuthVet(string login, string password)
+        {
+            List<Doctors> doctors = new List<Doctors>(DBConnection.clinic.Doctors);
+            var userExists = doctors.FirstOrDefault(i => i.Surname.Trim() == login && i.DoctorID.ToString() == password);
+            if (userExists == null)
+            {
+                MessageBox.Show("Такого врача не существует", "Ошибка пользователя", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                MessageBox.Show($"Ветеринар {userExists.Surname} {userExists.Name}", "", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             return userExists;
         }

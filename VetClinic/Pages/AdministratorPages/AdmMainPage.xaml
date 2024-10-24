@@ -1,4 +1,4 @@
-﻿<Page x:Class="VetClinic.Pages.RegistrationPage"
+﻿<Page x:Class="VetClinic.Pages.AdmMainPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,8 +6,7 @@
       xmlns:local="clr-namespace:VetClinic.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="900" d:DesignWidth="1450"
-      
-      Title="RegistrationPage">
+      Title="AdmMainPage">
 
     <Grid>
         <!--
@@ -30,33 +29,12 @@
             Fill="AliceBlue"/>
         <Rectangle Grid.ColumnSpan="2"
             Fill="AliceBlue"/>
-        <!--
-Кнопка назад
--->
-        <Button Style="{StaticResource back}" 
-        Grid.Row="1" Click="BackBtn_Click"/>
 
         <!--
         Заголовок
         -->
-        <TextBlock Text="Регистрация клиента" 
+        <TextBlock Text="Главная страница" 
                    Grid.Row="1" Grid.Column="1"
                    Style="{StaticResource Main}"/>
-        <StackPanel Grid.Row="2" Grid.Column="1"        
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Width="300">
-            <TextBlock Text="Фамилия" Style="{StaticResource default}"/>
-            <TextBox x:Name="surnameTb"/>
-            <TextBlock Text="Имя" Style="{StaticResource default}"/>
-            <TextBox x:Name="nameTb"/>
-            <TextBlock Text="Отчество" Style="{StaticResource default}"/>
-            <TextBox x:Name="PatronymicTb"/>
-            <TextBlock Text="Дата рождения" Style="{StaticResource default}"/>
-            <DatePicker x:Name="dateDp" Width="auto"/>
-            <Button x:Name="regBtn" Width="auto" Click="regBtn_Click">
-                Зарегистрироваться
-            </Button>
-        </StackPanel>
     </Grid>
 </Page>

@@ -31,11 +31,30 @@ namespace VetClinic.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Clients user = new Clients();
-            user = User.Auth(loginTb.Text.Trim(), passwordTb.Password.Trim());
-            if (user != null)
+            if (loginTb.Text.Trim() == User.userNameAdm && passwordTb.Password.Trim() == User.passwordAdm)
             {
-                NavigationService.Navigate(new MainPage());
+                User.Role = 3;
+                NavigationService.Navigate(new AdmMainPage());
+            }
+            else
+            {
+                Clients user = new Clients();
+                user = User.Auth(loginTb.Text.Trim(), passwordTb.Password.Trim());
+                User.Role = 1;
+                if (user != null)
+                {
+                    NavigationService.Navigate(new MainPage());
+                }
+                else
+                {
+                    Doctors doctor = new Doctors();
+                    doctor = User.AuthVet(loginTb.Text.Trim(), passwordTb.Password.Trim());
+                    if (doctor != null)
+                    {
+                        User.Role = 2;
+                        NavigationService.Navigate(new VetMainPage());
+                    }
+                }
             }
         }
 
