@@ -37,7 +37,7 @@ namespace VetClinic.Functions
             var userExists = doctors.FirstOrDefault(i => i.Surname.Trim() == login && i.DoctorID.ToString() == password);
             if (userExists == null)
             {
-                MessageBox.Show("Такого врача не существует", "Ошибка пользователя", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Такого пользователя не существует", "Ошибка пользователя", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
@@ -68,6 +68,30 @@ namespace VetClinic.Functions
                 doctors = new List<Doctors>(DBConnection.clinic.Doctors);
                 userReg = doctors.First(i => i.Surname == Surname && i.Name == Name);
                 MessageBox.Show($"Ваш пароль {userReg.DoctorID}");
+            }
+            return userReg;
+
+        }
+        public static Clients RegClient(string Surname, string Name, string Patronymic, DateTime Datestart)
+        {
+            List<Clients> clients = new List<Clients>(DBConnection.clinic.Clients);
+            Clients userReg = new Clients();
+            if (Surname == null || Name == null || Patronymic == null || Datestart == null)
+            {
+                MessageBox.Show("Не все поля заполнены");
+                userReg = null;
+            }
+            else
+            {
+                userReg.Surname = Surname;
+                userReg.Name = Name;
+                userReg.Patronymic = Patronymic;
+                userReg.Birthday = Datestart;
+                DBConnection.clinic.Clients.Add(userReg);
+                DBConnection.clinic.SaveChanges();
+                clients = new List<Clients>(DBConnection.clinic.Clients);
+                userReg = clients.First(i => i.Surname == Surname && i.Name == Name);
+                MessageBox.Show($"Клиент {userReg.Surname} {userReg.Name[0]}. {userReg.Patronymic[0]}. добавлен. Идентификатор {userReg.ClientID}");
             }
             return userReg;
 

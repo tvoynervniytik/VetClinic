@@ -36,5 +36,17 @@
         <TextBlock Text="Главная страница" 
                    Grid.Row="1" Grid.Column="1"
                    Style="{StaticResource Main}"/>
+
+        <StackPanel Grid.Row="2" Grid.Column="1" 
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <Button x:Name="clientAddBtn" 
+                    Content="Добавить клиента" 
+                    Width="300" Click="clientAddBtn_Click"/>
+            <Button x:Name="petAddBtn" 
+                    Content="Добавить питомца" 
+                    Width="300" Click="petAddBtn_Click"/>
+            
+        </StackPanel>
     </Grid>
 </Page>

@@ -34,6 +34,7 @@ namespace VetClinic.Pages
             if (loginTb.Text.Trim() == User.userNameAdm && passwordTb.Password.Trim() == User.passwordAdm)
             {
                 User.Role = 3;
+                MessageBox.Show("Администратор-регистратор");
                 NavigationService.Navigate(new AdmMainPage());
             }
             else

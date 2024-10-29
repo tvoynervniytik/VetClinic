@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VetClinic.Pages.AdministratorPages;
 
 namespace VetClinic.Pages
 {
@@ -23,6 +24,16 @@ namespace VetClinic.Pages
         public AdmMainPage()
         {
             InitializeComponent();
+        }
+
+        private void clientAddBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ClientRegPage());
+        }
+
+        private void petAddBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

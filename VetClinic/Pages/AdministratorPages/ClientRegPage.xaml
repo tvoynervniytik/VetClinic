@@ -1,0 +1,62 @@
+﻿<Page x:Class="VetClinic.Pages.AdministratorPages.ClientRegPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VetClinic.Pages.AdministratorPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="1450"
+      Title="ClientRegPage">
+
+    <Grid>
+        <!--
+        Разметка страницы
+        -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--
+        Цветные поля
+        -->
+        <Rectangle Grid.RowSpan="3"
+            Fill="AliceBlue"/>
+        <Rectangle Grid.ColumnSpan="2"
+            Fill="AliceBlue"/>
+        <!--
+Кнопка назад
+-->
+        <Button Style="{StaticResource back}" 
+        Grid.Row="1" Click="BackBtn_Click"/>
+
+        <!--
+        Заголовок
+        -->
+        <TextBlock Text="Регистрация клиента" 
+                   Grid.Row="1" Grid.Column="1"
+                   Style="{StaticResource Main}"/>
+        <StackPanel Grid.Row="2" Grid.Column="1"        
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="300">
+            <TextBlock Text="Фамилия" Style="{StaticResource default}"/>
+            <TextBox x:Name="surnameTb"/>
+            <TextBlock Text="Имя" Style="{StaticResource default}"/>
+            <TextBox x:Name="nameTb"/>
+            <TextBlock Text="Отчество" Style="{StaticResource default}"/>
+            <TextBox x:Name="PatronymicTb"/>
+            <TextBlock Text="Дата рождения" Width="300" Style="{StaticResource default}"/>
+            <DatePicker x:Name="dateDp" Width="auto"/>
+            <Button x:Name="regBtn" Width="auto" Click="regBtn_Click">
+
+                Зарегистрироваться
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>

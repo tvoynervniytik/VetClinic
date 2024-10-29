@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace VetClinic.Pages
+namespace VetClinic.Pages.AdministratorPages
 {
     /// <summary>
-    /// Логика взаимодействия для MainPage.xaml
+    /// Логика взаимодействия для PetRegPAge.xaml
     /// </summary>
-    public partial class MainPage : Page
+    public partial class PetRegPage : Page
     {
-        public MainPage()
+        public PetRegPage()
         {
             InitializeComponent();
         }
