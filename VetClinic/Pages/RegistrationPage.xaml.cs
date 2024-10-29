@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VetClinic.DB;
 using VetClinic.Functions;
 
 namespace VetClinic.Pages
@@ -21,20 +22,26 @@ namespace VetClinic.Pages
     /// </summary>
     public partial class RegistrationPage : Page
     {
+        private static List<Posts> posts {  get; set; }
         public RegistrationPage()
         {
             InitializeComponent();
+            posts = new List<Posts>(DBConnection.clinic.Posts);
+            postCb.ItemsSource = posts;
+            this.DataContext = this;
         }
 
         private void regBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (nameTb.Text == "" || PatronymicTb.Text == "" || surnameTb.Text == "" || dateDp.SelectedDate == null)
+            var post = postCb.SelectedItem as Posts;
+            if (nameTb.Text == "" || PatronymicTb.Text == "" || surnameTb.Text == "" || dateDp.SelectedDate == null || diplomTb.Text == "" || post == null)
             {
                 MessageBox.Show("Не все поля заполнены");
             }
             else
             {
-                var userR = User.Reg(nameTb.Text.Trim(), surnameTb.Text.Trim(), PatronymicTb.Text.Trim(), dateDp.SelectedDate.Value);
+                int postId = post.PostID;
+                var userR = User.Reg(nameTb.Text.Trim(), surnameTb.Text.Trim(), PatronymicTb.Text.Trim(), dateDp.SelectedDate.Value, diplomTb.Text, postId);
                 if (userR != null)
                 {
                     NavigationService.Navigate(new AuthorizationPage());

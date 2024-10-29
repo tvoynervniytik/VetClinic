@@ -46,11 +46,11 @@ namespace VetClinic.Functions
             doctor = userExists;
             return userExists;
         }
-        public static Clients Reg(string Surname, string Name, string Patronymic, DateTime Birthday)
+        public static Doctors Reg(string Surname, string Name, string Patronymic, DateTime Datestart, string Diplom, int Post)
         {
-            List<Clients> clients = new List<Clients>(DBConnection.clinic.Clients);
-            Clients userReg = new Clients();
-            if (Surname == null || Name == null || Patronymic == null || Birthday == null)
+            List<Doctors> doctors = new List<Doctors>(DBConnection.clinic.Doctors);
+            Doctors userReg = new Doctors();
+            if (Surname == null || Name == null || Patronymic == null || Datestart == null)
             {
                 MessageBox.Show("Не все поля заполнены");
                 userReg = null;
@@ -60,12 +60,14 @@ namespace VetClinic.Functions
                 userReg.Surname = Surname;
                 userReg.Name = Name;
                 userReg.Patronymic = Patronymic;
-                userReg.Birthday = Birthday;
-                DBConnection.clinic.Clients.Add(userReg);
+                userReg.StartDate = Datestart;
+                userReg.DiplomNumber = Diplom;
+                userReg.PostID = Post;
+                DBConnection.clinic.Doctors.Add(userReg);
                 DBConnection.clinic.SaveChanges();
-                clients = new List<Clients>(DBConnection.clinic.Clients);
-                userReg = clients.First(i => i.Surname == Surname && i.Name == Name);
-                MessageBox.Show($"Ваш пароль {userReg.ClientID}");
+                doctors = new List<Doctors>(DBConnection.clinic.Doctors);
+                userReg = doctors.First(i => i.Surname == Surname && i.Name == Name);
+                MessageBox.Show($"Ваш пароль {userReg.DoctorID}");
             }
             return userReg;
 

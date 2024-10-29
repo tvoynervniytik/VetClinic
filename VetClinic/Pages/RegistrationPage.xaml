@@ -45,16 +45,27 @@
         <StackPanel Grid.Row="2" Grid.Column="1"        
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Width="300">
+                    Width="320">
             <TextBlock Text="Фамилия" Style="{StaticResource default}"/>
             <TextBox x:Name="surnameTb"/>
             <TextBlock Text="Имя" Style="{StaticResource default}"/>
             <TextBox x:Name="nameTb"/>
             <TextBlock Text="Отчество" Style="{StaticResource default}"/>
             <TextBox x:Name="PatronymicTb"/>
-            <TextBlock Text="Дата рождения" Style="{StaticResource default}"/>
+            <TextBlock Text="Дата старта работы" Width="320" Style="{StaticResource default}"/>
             <DatePicker x:Name="dateDp" Width="auto"/>
+            <TextBlock Text="Номер диплома" Style="{StaticResource default}"/>
+            <TextBox x:Name="diplomTb"/>
+            <TextBlock Text="Должность" Style="{StaticResource default}"/>
+            <ComboBox x:Name="postCb" Width="300" Margin="7">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <Button x:Name="regBtn" Width="auto" Click="regBtn_Click">
+                
                 Зарегистрироваться
             </Button>
         </StackPanel>
