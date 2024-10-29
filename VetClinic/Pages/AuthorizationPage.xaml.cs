@@ -38,23 +38,15 @@ namespace VetClinic.Pages
             }
             else
             {
-                Clients user = new Clients();
-                user = User.Auth(loginTb.Text.Trim(), passwordTb.Password.Trim());
-                User.Role = 1;
-                if (user != null)
+               
+                Doctors doctor = new Doctors();
+                doctor = User.AuthVet(loginTb.Text.Trim(), passwordTb.Password.Trim());
+                if (doctor != null)
                 {
-                    NavigationService.Navigate(new MainPage());
+                    User.Role = 2;
+                    NavigationService.Navigate(new VetMainPage());
                 }
-                else
-                {
-                    Doctors doctor = new Doctors();
-                    doctor = User.AuthVet(loginTb.Text.Trim(), passwordTb.Password.Trim());
-                    if (doctor != null)
-                    {
-                        User.Role = 2;
-                        NavigationService.Navigate(new VetMainPage());
-                    }
-                }
+                
             }
         }
 
