@@ -9,6 +9,90 @@
       Title="PetRegPage">
 
     <Grid>
-        
+        <!--
+        Разметка страницы
+        -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--
+        Цветные поля
+        -->
+        <Rectangle Grid.RowSpan="3"
+            Fill="AliceBlue"/>
+        <Rectangle Grid.ColumnSpan="2"
+            Fill="AliceBlue"/>
+
+        <!--
+        Кнопка назад
+        -->
+        <Button Style="{StaticResource back}" 
+        Grid.Row="1" Click="BackBtn_Click"/>
+
+        <!--
+        Заголовок
+        -->
+        <StackPanel Orientation="Horizontal" 
+                    Grid.Row="1" Grid.Column="1"
+                    HorizontalAlignment="Center">
+            <TextBlock Text="Регистрация питомца" 
+                       Style="{StaticResource Main}"/>
+            <TextBlock x:Name="AppTb" Style="{StaticResource Main}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    Width="300"
+                    VerticalAlignment="Center">
+            <TextBlock Text="Дата:" 
+                       Style="{StaticResource default}"
+                       Margin="7"/>
+            <DatePicker Name="birthdayDp" Width="250"/>
+            <StackPanel Orientation="Vertical" Width="300">
+                <StackPanel Margin="7">
+                    <TextBlock Text="Клиент:" 
+                               Style="{StaticResource default}"/>
+                    <ComboBox Width="270" x:Name="clientsCb" ItemsSource="{Binding Clients}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Surname}"/>
+                                    <TextBlock Text="{Binding Name[0], StringFormat=' {0}.'}"/>
+                                    <TextBlock Text="{Binding Patronymic[0], StringFormat=' {0}.'}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Margin="7">
+                </StackPanel>
+                <StackPanel Margin="7">
+                    <TextBlock Text="Тип животного:" 
+                               Style="{StaticResource default}"/>
+                    <ComboBox Width="270" x:Name="typeCb" ItemsSource="{Binding Clients}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+
+            </StackPanel>
+
+            <Button Content="Зарегистрировать" Name="addBtn" 
+                    Click="addBtn_Click"
+                    Margin="0 20 0 0"
+                    Width="300"
+                    HorizontalAlignment="Center"/>
+        </StackPanel>
+
     </Grid>
 </Page>

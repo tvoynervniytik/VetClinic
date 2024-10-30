@@ -55,7 +55,7 @@
             <DatePicker x:Name="dateDp" Width="auto"/>
             <Button x:Name="regBtn" Width="auto" Click="regBtn_Click">
 
-                Зарегистрироваться
+                Зарегистрировать
             </Button>
         </StackPanel>
     </Grid>

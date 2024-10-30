@@ -97,5 +97,29 @@ namespace VetClinic.Functions
 
         }
 
+        public static Pets RegPet(int TypeAnimal, int ClientID, DateTime Datestart)
+        {
+            List<Pets> pets = new List<Pets>(DBConnection.clinic.Pets);
+            Pets userReg = new Pets();
+            if (TypeAnimal == 0 || ClientID == 0 || Datestart == null)
+            {
+                MessageBox.Show("Не все поля заполнены");
+                userReg = null;
+            }
+            else
+            {
+                userReg.ClientID = ClientID;
+                userReg.TypeAnimalID = TypeAnimal; 
+                userReg.Birthday = Datestart;
+                DBConnection.clinic.Pets.Add(userReg);
+                DBConnection.clinic.SaveChanges();
+                pets = new List<Pets>(DBConnection.clinic.Pets);
+                userReg = pets.Last();
+                MessageBox.Show($"Питомец {userReg.PetID} добавлен");
+            }
+            return userReg;
+
+        }
+
     }
 }
