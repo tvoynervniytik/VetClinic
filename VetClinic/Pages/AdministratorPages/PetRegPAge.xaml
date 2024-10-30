@@ -51,7 +51,7 @@
                     HorizontalAlignment="Center"
                     Width="300"
                     VerticalAlignment="Center">
-            <TextBlock Text="Дата:" 
+            <TextBlock Text="Дата рождения:" 
                        Style="{StaticResource default}"
                        Margin="7"/>
             <DatePicker Name="birthdayDp" Width="250"/>

@@ -50,10 +50,17 @@ namespace VetClinic.Pages.AdministratorPages
             }
             else
             {
-                var userR = User.RegPet(type.TypeAnimalID, client.ClientID, birthdayDp.SelectedDate.Value);
-                if (userR != null)
+                if (birthdayDp.SelectedDate > DateTime.Now)
                 {
-                    NavigationService.Navigate(new AdmMainPage());
+                    MessageBox.Show("Дата указана неверно", "ошибка даты рождения", MessageBoxButton.OK, MessageBoxImage.Hand);
+                }
+                else
+                {
+                    var userR = User.RegPet(type.TypeAnimalID, client.ClientID, birthdayDp.SelectedDate.Value);
+                    if (userR != null)
+                    {
+                        NavigationService.Navigate(new AdmMainPage());
+                    }
                 }
             }
         }
