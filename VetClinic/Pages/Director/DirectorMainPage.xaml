@@ -1,0 +1,126 @@
+﻿<Page x:Class="VetClinic.Pages.Director.DirectorMainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VetClinic.Pages.Director"
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="1450"
+      Title="DirectorMainPage">
+
+    <Grid>
+
+        <!--
+        Разметка страницы
+        -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--
+        Цветные поля
+        -->
+        <Rectangle Grid.RowSpan="3"
+            Fill="AliceBlue"/>
+        <Rectangle Grid.ColumnSpan="2"
+            Fill="AliceBlue"/>
+
+        <!--
+        Заголовок
+        -->
+        <TextBlock Text="Отчётность" 
+                   Grid.Row="1" Grid.Column="1"
+                   Style="{StaticResource Main}"/>
+
+        <StackPanel HorizontalAlignment="Center" 
+                    VerticalAlignment="Top"
+                    Margin="0 40 0 0"
+                    Grid.Row="2"
+                    Width="1000"
+                    Grid.Column="1">
+            <StackPanel Orientation="Horizontal" Height="150">
+                <StackPanel>
+                    <TextBlock Text="Вид отчёта:" Style="{StaticResource default}"
+                               Margin="0 0 0 10"/>
+                    <ComboBox Width="300" Height="70"
+                              x:Name="reportCb" SelectionChanged="reportCb_SelectionChanged">
+                        <ComboBoxItem>
+                            <TextBlock Text="Выработка врачей"/>
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            <TextBlock Text="О посещении клиентами"/>
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            <TextBlock Text=""/>
+                        </ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Margin="10 0">
+                    <StackPanel Orientation="Horizontal" Margin=" 0 0 0 10">
+                        <TextBlock Text="от" Style="{StaticResource default}"
+                                   Margin="5 0"/>
+                        <DatePicker Name="startDp"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="до" Style="{StaticResource default}"
+                                   Margin="5 0"/>
+                        <DatePicker x:Name="endDp"/>
+                    </StackPanel>
+                </StackPanel>
+                <Button Content="Сформировать отчёт" 
+                        Name="reportBtn"
+                        Width="300" Click="reportBtn_Click"/>
+            </StackPanel>
+            <StackPanel Width="900" Height="400" 
+                        VerticalAlignment="Bottom"
+                        Background="LightGray">
+                <ListView Height="400" Width="900" 
+                          x:Name="worktimeLv" 
+                          Visibility="Hidden"
+                          HorizontalAlignment="Center" 
+                          VerticalAlignment="Center">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Врач" Width="290">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBlock Style="{StaticResource default}"
+                                                       Text="{Binding Surname}"/>
+                                            <TextBlock Style="{StaticResource default}"
+                                                       Text="{Binding Name}"/>
+                                            <TextBlock Style="{StaticResource default}"
+                                                       Text="{Binding Patronymic}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Количество приёмов" 
+                                            Width="260">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding AppoinmentsQuantity}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Количество минут" 
+                                            Width="260">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding TimeQuantity}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

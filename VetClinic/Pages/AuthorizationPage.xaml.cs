@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using VetClinic.DB;
 using VetClinic.Functions;
+using VetClinic.Pages.Director;
 
 namespace VetClinic.Pages
 {
@@ -36,6 +37,12 @@ namespace VetClinic.Pages
                 User.Role = 3;
                 MessageBox.Show("Администратор-регистратор");
                 NavigationService.Navigate(new AdmMainPage());
+            }
+            else if (loginTb.Text.Trim() == User.userNameDirector && passwordTb.Password.Trim() == User.passwordDirector)
+            {
+                User.Role = 1;
+                MessageBox.Show("Главный администратор");
+                NavigationService.Navigate(new DirectorMainPage());
             }
             else
             {

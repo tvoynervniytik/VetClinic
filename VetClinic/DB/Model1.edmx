@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище VeterinaryClinicModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище VeterinaryClinicModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Appointment">
           <Key>
             <PropertyRef Name="AppointmentID" />
@@ -52,6 +52,8 @@
           <Property Name="StartDate" Type="date" Nullable="false" />
           <Property Name="DiplomNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="PostID" Type="int" Nullable="false" />
+          <Property Name="AppoinmentsQuantity" Type="int" />
+          <Property Name="TimeQuantity" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
@@ -286,8 +288,7 @@
             <End Role="Pets" EntitySet="Pets" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="VeterinaryClinicModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -347,6 +348,8 @@
           <Property Name="PostID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Appointment" Relationship="Self.FK_Appointment_Doctors" FromRole="Doctors" ToRole="Appointment" />
           <NavigationProperty Name="Posts" Relationship="Self.FK_Doctors_Posts" FromRole="Doctors" ToRole="Posts" />
+          <Property Name="AppoinmentsQuantity" Type="Int32" />
+          <Property Name="TimeQuantity" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
@@ -641,6 +644,8 @@
           <EntitySetMapping Name="Doctors">
             <EntityTypeMapping TypeName="VeterinaryClinicModel.Doctors">
               <MappingFragment StoreEntitySet="Doctors">
+                <ScalarProperty Name="TimeQuantity" ColumnName="TimeQuantity" />
+                <ScalarProperty Name="AppoinmentsQuantity" ColumnName="AppoinmentsQuantity" />
                 <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

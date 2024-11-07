@@ -11,9 +11,12 @@ namespace VetClinic.Functions
 {
     public class User
     {
-        public static int Role = 1;
+        public static int Role;
         public static string passwordAdm = "111";
         public static string userNameAdm = "111";
+        public static string passwordDirector = "222";
+        public static string userNameDirector = "admin";
+
         public static Clients client;
         public static Doctors doctor;
         //public static Clients Auth(string login, string password)

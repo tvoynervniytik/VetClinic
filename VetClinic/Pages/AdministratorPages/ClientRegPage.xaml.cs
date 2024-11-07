@@ -35,11 +35,21 @@ namespace VetClinic.Pages.AdministratorPages
             }
             else
             {
-                var userR = User.RegClient(nameTb.Text.Trim(), surnameTb.Text.Trim(), PatronymicTb.Text.Trim(), dateDp.SelectedDate.Value);
-                if (userR != null)
-                {
-                    NavigationService.Navigate(new AdmMainPage());
-                }
+                DateTime now = DateTime.Now;
+                DateTime date = dateDp.SelectedDate.Value;
+
+                //if ((now. - date).T < 18)
+                //{
+
+                //}
+                //else
+                //{
+                    var userR = User.RegClient(nameTb.Text.Trim(), surnameTb.Text.Trim(), PatronymicTb.Text.Trim(), dateDp.SelectedDate.Value);
+                    if (userR != null)
+                    {
+                        NavigationService.Navigate(new AdmMainPage());
+                    }
+                //}
             }
         }
 

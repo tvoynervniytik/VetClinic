@@ -27,6 +27,8 @@ namespace VetClinic.DB
         public System.DateTime StartDate { get; set; }
         public string DiplomNumber { get; set; }
         public int PostID { get; set; }
+        public Nullable<int> AppoinmentsQuantity { get; set; }
+        public Nullable<decimal> TimeQuantity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Appointment> Appointment { get; set; }
