@@ -24,6 +24,7 @@ namespace VetClinic.DB
         public int ClientID { get; set; }
         public int TypeAnimalID { get; set; }
         public Nullable<System.DateTime> Birthday { get; set; }
+        public Nullable<int> AppoinmentsQuantity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Appointment> Appointment { get; set; }

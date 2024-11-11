@@ -24,6 +24,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Patronymic" Type="nvarchar" MaxLength="50" />
           <Property Name="Birthday" Type="date" />
+          <Property Name="AppoinmentsQuantity" Type="int" />
         </EntityType>
         <EntityType Name="Consumption">
           <Key>
@@ -89,6 +90,7 @@
           <Property Name="ClientID" Type="int" Nullable="false" />
           <Property Name="TypeAnimalID" Type="int" Nullable="false" />
           <Property Name="Birthday" Type="date" />
+          <Property Name="AppoinmentsQuantity" Type="int" />
         </EntityType>
         <EntityType Name="Posts">
           <Key>
@@ -315,6 +317,7 @@
           <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Birthday" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Pets" Relationship="Self.FK_Pets_Clients" FromRole="Clients" ToRole="Pets" />
+          <Property Name="AppoinmentsQuantity" Type="Int32" />
         </EntityType>
         <EntityType Name="Consumption">
           <Key>
@@ -394,6 +397,7 @@
           <NavigationProperty Name="Appointment" Relationship="Self.FK_Appointment_Pets" FromRole="Pets" ToRole="Appointment" />
           <NavigationProperty Name="Clients" Relationship="Self.FK_Pets_Clients" FromRole="Pets" ToRole="Clients" />
           <NavigationProperty Name="TypeAnimal" Relationship="Self.FK_Pets_TypeAnimal" FromRole="Pets" ToRole="TypeAnimal" />
+          <Property Name="AppoinmentsQuantity" Type="Int32" />
         </EntityType>
         <EntityType Name="Posts">
           <Key>
@@ -615,6 +619,7 @@
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="VeterinaryClinicModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="AppoinmentsQuantity" ColumnName="AppoinmentsQuantity" />
                 <ScalarProperty Name="ClientID" ColumnName="ClientID" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -688,6 +693,7 @@
           <EntitySetMapping Name="Pets">
             <EntityTypeMapping TypeName="VeterinaryClinicModel.Pets">
               <MappingFragment StoreEntitySet="Pets">
+                <ScalarProperty Name="AppoinmentsQuantity" ColumnName="AppoinmentsQuantity" />
                 <ScalarProperty Name="PetID" ColumnName="PetID" />
                 <ScalarProperty Name="ClientID" ColumnName="ClientID" />
                 <ScalarProperty Name="TypeAnimalID" ColumnName="TypeAnimalID" />

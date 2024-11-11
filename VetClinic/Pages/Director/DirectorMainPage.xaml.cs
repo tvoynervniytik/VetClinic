@@ -24,6 +24,7 @@ namespace VetClinic.Pages.Director
         private static List<Pets> pets {  get; set; }
         private static List<Doctors> doctors { get; set; }
         private static List<Appointment> appointments { get; set; }
+        private static List<Clients> clients { get; set; }
         public DirectorMainPage()
         {
             InitializeComponent();
@@ -36,9 +37,12 @@ namespace VetClinic.Pages.Director
             pets = new List<Pets>(DBConnection.clinic.Pets);
             doctors = new List<Doctors>(DBConnection.clinic.Doctors);
             appointments = new List<Appointment>(DBConnection.clinic.Appointment);
+            clients = new List<Clients>(DBConnection.clinic.Clients);
             var cb = reportCb.SelectedIndex;
+
             var startDate = startDp.SelectedDate;
             var endDate = endDp.SelectedDate;
+
             if (startDate > endDate) { MessageBox.Show("Дата начала не может быть больше даты конца", "error", MessageBoxButton.OK, MessageBoxImage.Error); }
             else
             {
@@ -54,6 +58,8 @@ namespace VetClinic.Pages.Director
             if (cb == 0)
             {
                 worktimeLv.Visibility = Visibility.Visible;
+                petsTimesLv.Visibility = Visibility.Hidden;
+                clientsTimesLv.Visibility = Visibility.Hidden;
 
                 foreach (Doctors doctor in doctors)
                 {
@@ -66,6 +72,30 @@ namespace VetClinic.Pages.Director
             else if (cb == 1) 
             { 
                 worktimeLv.Visibility = Visibility.Hidden;
+                clientsTimesLv.Visibility = Visibility.Visible;
+                petsTimesLv.Visibility = Visibility.Hidden;
+
+                foreach (Clients client in clients)
+                {
+                    var times = appointments.Where(i => i.Pets.ClientID == client.ClientID).Count();
+                    client.AppoinmentsQuantity = times;
+                    
+                }
+                clientsTimesLv.ItemsSource = clients;
+            }
+            else if (cb == 2) 
+            { 
+                worktimeLv.Visibility = Visibility.Hidden;
+                clientsTimesLv.Visibility = Visibility.Hidden;
+                petsTimesLv.Visibility = Visibility.Visible;
+
+                foreach (Pets pet in pets)
+                {
+                    var times = appointments.Where(i => i.PetID == pet.PetID).Count();
+                    pet.AppoinmentsQuantity = times;
+                    
+                }
+                petsTimesLv.ItemsSource = pets;
             }
         }
         private void reportBtn_Click(object sender, RoutedEventArgs e)

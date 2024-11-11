@@ -57,7 +57,7 @@
                             <TextBlock Text="О посещении клиентами"/>
                         </ComboBoxItem>
                         <ComboBoxItem>
-                            <TextBlock Text=""/>
+                            <TextBlock Text="О посещении питомцев"/>
                         </ComboBoxItem>
                     </ComboBox>
                 </StackPanel>
@@ -114,6 +114,92 @@
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding TimeQuantity}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <ListView Height="400" Width="900" 
+                          x:Name="petsTimesLv" 
+                          Margin="0 -400 0 0"
+                          Visibility="Hidden"
+                          HorizontalAlignment="Center" 
+                          VerticalAlignment="Center">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Питомец" Width="140">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBlock Style="{StaticResource default}"
+                                                       Text="{Binding PetID}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Тип животного" Width="180">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBlock Style="{StaticResource default}"
+                                                       Text="{Binding TypeAnimal.Name}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Хозяин" Width="250">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBlock Style="{StaticResource default}"
+                                                       Text="{Binding Clients.Surname}"/>
+                                            <TextBlock Style="{StaticResource default}"
+                                                       Text="{Binding Clients.Name}"/>
+                                            <TextBlock Style="{StaticResource default}"
+                                                       Text="{Binding Clients.Patronymic}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Количество посещений" 
+                                            Width="300">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding AppoinmentsQuantity}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <ListView Height="400" Width="900" 
+                          x:Name="clientsTimesLv" 
+                          Margin="0 -400 0 0"
+                          Visibility="Hidden"
+                          HorizontalAlignment="Center" 
+                          VerticalAlignment="Center">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Клиент" Width="450">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBlock Style="{StaticResource default}"
+                                                       Text="{Binding Surname}"/>
+                                            <TextBlock Style="{StaticResource default}"
+                                                       Text="{Binding Name}"/>
+                                            <TextBlock Style="{StaticResource default}"
+                                                       Text="{Binding Patronymic}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Количество посещений" 
+                                            Width="350">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding AppoinmentsQuantity}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
